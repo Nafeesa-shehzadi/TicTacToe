@@ -40,7 +40,8 @@ code {
   display: flex;
   justify-content: center; /* Center content horizontally */
   align-items: center; /* Center content vertically */
-  margin-top: 20px; /* Space above the button */
+  margin-top: 20px;
+  gap: 20px; /* Adds space between buttons */
 }
 .head-button {
   font-size: 16px;
@@ -87,8 +88,55 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin: 0 10px;
 }
-
 button:hover {
   background-color: #b30083;
+}
+.register-form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #bc1b84;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"],
+.register-form input[type="tel"] {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.register-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #da5e9c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-form input[type="submit"]:hover {
+  background-color: #a74275;
 }
