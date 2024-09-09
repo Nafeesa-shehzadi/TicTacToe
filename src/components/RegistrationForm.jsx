@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function RegistrationForm() {
   const [formData, setformData] = useState({
@@ -10,6 +10,15 @@ function RegistrationForm() {
     gender: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFirstNameValid, setIsFirstNameValid] = useState(true);
+  const [isLastNameValid, setIsLastNameValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
+  const [isGenderValid, setIsGenderValid] = useState(true);
+
   const handlechange = (event) => {
     const { name, value } = event.target;
     setformData({
@@ -19,19 +28,41 @@ function RegistrationForm() {
   };
   const handlesubmit = (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setErrorMessage("Password does not match");
-      alert("Password does not match");
-      console.log("Password does not match");
-      console.log(formData.password);
-      console.log(formData.confirmPassword);
-    } else {
-      setErrorMessage("");
-      alert("Data submitted succesfully!");
-      console.log(formData);
-    }
-  };
 
+    setIsSubmitting(true);
+
+    // Simulate form submission process
+    setTimeout(() => {
+      if (formData.password !== formData.confirmPassword) {
+        setErrorMessage("Password does not match");
+        alert("Password does not match");
+      } else {
+        setErrorMessage("");
+        alert("Data submitted successfully!");
+        console.log(formData);
+      }
+      setIsSubmitting(false);
+    }, 1000); // Simulating a delay for form submission
+  };
+  useEffect(() => {
+    // Validate form fields
+    const isValid =
+      formData.firstName &&
+      formData.lastName &&
+      formData.email &&
+      formData.password &&
+      formData.confirmPassword &&
+      formData.gender &&
+      formData.password === formData.confirmPassword;
+
+    setIsFormValid(isValid);
+    setIsFirstNameValid(formData.firstName.length >= 3);
+    setIsLastNameValid(formData.lastName.length >= 3);
+    setIsEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email));
+    setIsPasswordValid(/(?=.*\d)(?=.*[!@#$%^&*]).{8,}/.test(formData.password));
+    setIsConfirmPasswordValid(formData.password === formData.confirmPassword);
+    setIsGenderValid(formData.gender !== "");
+  }, [formData]);
   return (
     <div className="flex items-center justify-center min-h-screen bg-cover bg-center">
       <div className="register-form">
@@ -48,6 +79,10 @@ function RegistrationForm() {
               onChange={handlechange}
               pattern="[A-Za-z]{3,}"
               title="Name must have minimum 3 characters."
+              placeholder="FirstName"
+              style={{
+                borderColor: isFirstNameValid ? "gray" : "red",
+              }}
             />
           </div>
           <div>
@@ -61,6 +96,10 @@ function RegistrationForm() {
               onChange={handlechange}
               pattern="[A-Za-z]{3,}"
               title="Name must have minimum 3 characters."
+              placeholder="LastName"
+              style={{
+                borderColor: isLastNameValid ? "gray" : "red",
+              }}
             />
           </div>
           <div>
@@ -73,6 +112,9 @@ function RegistrationForm() {
               onChange={handlechange}
               placeholder="example@gmail.com"
               required
+              style={{
+                borderColor: isEmailValid ? "gray" : "red",
+              }}
             />
           </div>
           <div>
@@ -87,6 +129,9 @@ function RegistrationForm() {
               required
               pattern="(?=.*\d)(?=.*[!@#$%^&*]).{8,}"
               title="password must have minimum 8 characters ,1 Number and 1 Special character."
+              style={{
+                borderColor: isPasswordValid ? "gray" : "red",
+              }}
             />
           </div>
           <div>
@@ -99,6 +144,10 @@ function RegistrationForm() {
               onChange={handlechange}
               required
               title={errorMessage ? errorMessage : "confirm your password"}
+              placeholder="ConfirmPassword"
+              style={{
+                borderColor: isConfirmPasswordValid ? "gray" : "red",
+              }}
             />
           </div>
           <div>
@@ -110,6 +159,9 @@ function RegistrationForm() {
                 value="male"
                 checked={formData.gender === "male"}
                 onChange={handlechange}
+                style={{
+                  borderColor: isGenderValid ? "gray" : "red",
+                }}
               />
               Male
             </label>
@@ -134,7 +186,9 @@ function RegistrationForm() {
               Other
             </label>
           </div>
-          <input type="submit" value="Register" />
+          <button type="submit" disabled={!isFormValid || isSubmitting}>
+            {isSubmitting ? <span className="loader"></span> : "Register"}
+          </button>
         </form>
       </div>
     </div>

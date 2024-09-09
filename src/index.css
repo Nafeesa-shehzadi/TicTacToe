@@ -89,10 +89,21 @@ button {
   border-radius: 5px;
   cursor: pointer;
   margin: 0 10px;
+  transition: background-color 0.3s ease;
 }
+
 button:hover {
   background-color: #b30083;
 }
+
+/* Disabled button styles */
+button:disabled {
+  background-color: #d3d3d3; /* Light gray background */
+  color: #a9a9a9; /* Dark gray text color */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  opacity: 0.6; /* Make button slightly transparent */
+}
+
 .register-form {
   max-width: 500px;
   margin: 40px auto;
@@ -139,4 +150,29 @@ button:hover {
 
 .register-form input[type="submit"]:hover {
   background-color: #a74275;
+}
+
+.error-message {
+  color: red;
+}
+.input-error {
+  border-color: red;
+  border-width: 2px; /* Adjust the border width if necessary */
+}
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -54,55 +54,143 @@ function FormUsingFormick() {
             alert("Data submitted successfully!");
           }}
         >
-          <Form>
-            <div>
-              <label htmlFor="firstName">First Name:</label>
-              <Field type="text" id="firstName" name="firstName" />
-              <ErrorMessage name="firstName" component="small" />
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name:</label>
-              <Field type="text" id="lastName" name="lastName" />
-              <ErrorMessage name="lastName" component="small" />
-            </div>
-            <div>
-              <label htmlFor="email">Email:</label>
-              <Field type="email" id="email" name="email" />
-              <ErrorMessage name="email" component="small" />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <Field type="password" id="password" name="password" />
-              <ErrorMessage name="password" component="small" />
-            </div>
-            <div>
-              <label htmlFor="confirmPassword">Confirm Password:</label>
-              <Field
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-              />
-              <ErrorMessage name="confirmPassword" component="small" />
-            </div>
-            <div>
-              <p>Gender:</p>
+          {({ errors, touched }) => (
+            <Form>
+              <div>
+                <label htmlFor="firstName">First Name:</label>
+                <Field
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="First Name"
+                  style={
+                    errors.firstName && touched.firstName
+                      ? {
+                          borderColor: "red",
+                          borderWidth: "2px",
+                          borderStyle: "solid",
+                        }
+                      : {}
+                  }
+                />
+                <ErrorMessage
+                  name="firstName"
+                  component="small"
+                  className="error-message"
+                />
+              </div>
+              <div>
+                <label htmlFor="lastName">Last Name:</label>
+                <Field
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  style={
+                    errors.firstName && touched.firstName
+                      ? {
+                          borderColor: "red",
+                          borderWidth: "2px",
+                          borderStyle: "solid",
+                        }
+                      : {}
+                  }
+                  placeholder="Last Name"
+                />
+                <ErrorMessage
+                  name="lastName"
+                  component="small"
+                  className="error-message"
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email:</label>
+                <Field
+                  type="email"
+                  id="email"
+                  name="email"
+                  style={
+                    errors.firstName && touched.firstName
+                      ? {
+                          borderColor: "red",
+                          borderWidth: "2px",
+                          borderStyle: "solid",
+                        }
+                      : {}
+                  }
+                  placeholder="Email"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="small"
+                  className="error-message"
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Password:</label>
+                <Field
+                  type="password"
+                  id="password"
+                  name="password"
+                  style={
+                    errors.password && touched.password
+                      ? {
+                          borderColor: "red",
+                          borderWidth: "2px",
+                          borderStyle: "solid",
+                        }
+                      : {}
+                  }
+                />
+                <ErrorMessage
+                  name="password"
+                  component="small"
+                  className="error-message"
+                />
+              </div>
+              <div>
+                <label htmlFor="confirmPassword">Confirm Password:</label>
+                <Field
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  style={
+                    errors.confirmPassword && touched.confirmPassword
+                      ? {
+                          borderColor: "red",
+                          borderWidth: "2px",
+                          borderStyle: "solid",
+                        }
+                      : {}
+                  }
+                />
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="small"
+                  className="error-message"
+                />
+              </div>
+              <div>
+                <p>Gender:</p>
 
-              <label>
-                <Field type="radio" name="gender" value="male" />
-                Male
-              </label>
-              <label>
-                <Field type="radio" name="gender" value="female" />
-                Female
-              </label>
-              <label>
-                <Field type="radio" name="gender" value="other" />
-                Other
-              </label>
-              <ErrorMessage name="gender" component="small" />
-            </div>
-            <input type="submit" value="Register" />
-          </Form>
+                <label>
+                  <Field type="radio" name="gender" value="male" />
+                  Male
+                </label>
+                <label>
+                  <Field type="radio" name="gender" value="female" />
+                  Female
+                </label>
+                <label>
+                  <Field type="radio" name="gender" value="other" />
+                  Other
+                </label>
+                <ErrorMessage name="gender" component="small" />
+              </div>
+              <button type="submit" disabled={Formvalidation}>
+                Submit
+              </button>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>
